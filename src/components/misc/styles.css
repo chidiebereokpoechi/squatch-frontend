@@ -1,0 +1,17 @@
+:root {
+  --primary-color: #0098d4;
+}
+
+body {
+  background: white;
+  font-family: 'Circular Std';
+}
+
+* {
+  outline: none !important;
+}
+
+#root {
+  margin: 0;
+  padding: 0;
+}

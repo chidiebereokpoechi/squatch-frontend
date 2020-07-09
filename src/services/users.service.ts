@@ -1,6 +1,6 @@
 import { UserSignupModel } from '../models'
 import { User } from '../types'
-import { ApiClient } from '../util/api'
+import { ApiClient } from '../util'
 
 export class UsersService {
   public static async checkIfEmailTaken(email: string) {
@@ -17,5 +17,9 @@ export class UsersService {
 
   public static async list(page?: number) {
     return ApiClient.get<User[]>('users', page)
+  }
+
+  public static async retrieve(username: string) {
+    return ApiClient.getOne<User>('users', username)
   }
 }

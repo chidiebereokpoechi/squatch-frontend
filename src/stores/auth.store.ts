@@ -18,15 +18,13 @@ class AuthStore implements AuthState {
         })
       }
     } catch (e) {
-      // Do nothing for now
+      //
     } finally {
       this._ready = true
     }
   }
 
   @action public logIn = async (login: UserLoginModel) => {
-    this._ready = false
-
     try {
       const response = await AuthService.logIn(login)
       if (response.data) {
@@ -35,15 +33,11 @@ class AuthStore implements AuthState {
         })
       }
     } catch (e) {
-      // Do nothing
-    } finally {
-      this._ready = true
+      //
     }
   }
 
   @action public logOut = async () => {
-    this._ready = false
-
     try {
       const response = await AuthService.logOut()
       if (response.ok) {
@@ -52,9 +46,7 @@ class AuthStore implements AuthState {
         })
       }
     } catch (e) {
-      // Do nothing
-    } finally {
-      this._ready = true
+      //
     }
   }
 

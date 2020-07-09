@@ -60,7 +60,7 @@ export class ApiClient {
     request?: ApiRequest<RequestType>
   ): Promise<ApiResponse<ResponseType>> {
     this.abortController = new AbortController()
-    const base = process.env.REACT_APP_API_URL
+    const base = process.env.REACT_APP_BASE_URL
     const headers: Headers = new Headers()
     headers.append('content-type', 'application/json')
 
