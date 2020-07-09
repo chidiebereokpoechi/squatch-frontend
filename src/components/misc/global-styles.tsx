@@ -9,4 +9,9 @@ export enum BreakPoints {
 }
 
 export const GlobalStyles = createGlobalStyle`
+  @media screen and (max-width: ${BreakPoints.MD}) {
+    #root {
+      height: 100vh;
+    }
+  }
 `

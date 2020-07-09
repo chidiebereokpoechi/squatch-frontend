@@ -1,5 +1,6 @@
 :root {
-  --primary-color: #0098d4;
+  --primary-color: #fde500;
+  --secondary-color: #0064fd;
 }
 
 body {
@@ -14,4 +15,5 @@ body {
 #root {
   margin: 0;
   padding: 0;
+  display: flex;
 }

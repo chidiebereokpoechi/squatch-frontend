@@ -1,7 +1,14 @@
 import { AnimatePresence } from 'framer-motion'
 import React from 'react'
 import { Router, Switch } from 'react-router-dom'
-import { AppBackground, GlobalStyles, SpecialRoute, TopBar } from './components'
+import {
+  AppBackground,
+  AppWrapper,
+  GlobalStyles,
+  NavArea,
+  SpecialRoute,
+  TopBar,
+} from './components'
 import { FeedPage, LoginPage } from './pages'
 import { history } from './util'
 
@@ -19,10 +26,20 @@ export const App: React.FC = () => {
             component={LoginPage}
           />
           <SpecialRoute path="/" auth="auth">
-            <TopBar />
-            <Switch>
-              <SpecialRoute exact path="/" auth="auth" component={FeedPage} />
-            </Switch>
+            <AppWrapper>
+              <TopBar />
+              <main>
+                <NavArea />
+                <Switch>
+                  <SpecialRoute
+                    exact
+                    path="/"
+                    auth="auth"
+                    component={FeedPage}
+                  />
+                </Switch>
+              </main>
+            </AppWrapper>
           </SpecialRoute>
         </Switch>
       </AnimatePresence>

@@ -10,6 +10,8 @@ export const PageWrapper = styled(motion.div).attrs(() => {
   } as MotionProps
 })`
   padding: 1.5rem;
+  flex: 1;
+  overflow: auto;
 
   @media screen and (max-width: ${BreakPoints.MD}) {
     padding: 0.5rem;
