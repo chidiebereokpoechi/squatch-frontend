@@ -86,3 +86,10 @@ export function goBackOrPush(location: Path, state?: LocationState): void {
     history.push(location, state)
   }
 }
+
+export function blockNavigation() {
+  const unBlock = history.block(
+    'Are you sure you want to leave this page? You have unsaved changes'
+  )
+  return { unBlock }
+}

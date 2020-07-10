@@ -9,7 +9,7 @@ import {
   SpecialRoute,
   TopBar,
 } from './components'
-import { FeedPage, LoginPage } from './pages'
+import { HomePage, LoginPage } from './pages'
 import { history } from './util'
 
 export const App: React.FC = () => {
@@ -35,7 +35,7 @@ export const App: React.FC = () => {
                     exact
                     path="/"
                     auth="auth"
-                    component={FeedPage}
+                    component={HomePage}
                   />
                 </Switch>
               </main>

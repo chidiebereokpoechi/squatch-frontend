@@ -8,7 +8,7 @@ import { authStore } from '../../stores/auth.store'
 const StyleWrapper = styled(motion.div)`
   background: black;
   height: 4rem;
-  width: 100vw;
+  width: 100%;
   padding: 0.5rem 1.5rem;
   color: white;
   display: flex;
@@ -23,7 +23,7 @@ const StyleWrapper = styled(motion.div)`
 
   .name {
     display: inline-block;
-    color: var(--primary-color);
+    color: var(--secondary-color);
     font-weight: bold;
     padding: 0;
     margin: 0;
@@ -33,7 +33,7 @@ const StyleWrapper = styled(motion.div)`
 `
 
 const AnimatedLink = styled(Link)`
-  color: var(--primary-color) !important;
+  color: var(--secondary-color) !important;
 `
 
 export const TopBar: React.FC = observer(() => {
@@ -42,7 +42,13 @@ export const TopBar: React.FC = observer(() => {
   return (
     <StyleWrapper>
       <section className="d-flex align-items-center">
-        <img className="logo" src="/img/squatch-logo.svg" alt="Squatch logo" />
+        <motion.img
+          drag
+          dragConstraints={{ top: 0, left: 0, bottom: 0, right: 10 }}
+          className="logo"
+          src="/img/squatch-logo.svg"
+          alt="Squatch logo"
+        />
         <span>
           Hey{' '}
           <motion.span

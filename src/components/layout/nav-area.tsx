@@ -8,15 +8,19 @@ import { DarkButton } from '../buttons'
 import { BreakPoints } from '../misc'
 
 const StyleWrapper = styled.div`
-  width: 100vw;
+  width: 100%;
   display: flex;
   grid-gap: 1rem;
   padding: 1rem 1.5rem;
   flex-shrink: 0;
-  background: #f9f9f9aa;
-  backdrop-filter: blur(0.5rem);
+  background: #fffffff0;
+  backdrop-filter: blur(1rem);
   justify-content: center;
-  border-bottom: 1px solid #efefef;
+  border-bottom: 2px solid #2a2a2a;
+  position: sticky;
+  top: 0;
+  left: 0;
+  z-index: 1;
 
   .nav-area-link {
     color: #000;
@@ -27,7 +31,7 @@ const StyleWrapper = styled.div`
   }
 
   .active {
-    color: var(--secondary-color);
+    color: var(--primary-color);
   }
 
   .nav-item + .nav-item {
@@ -37,6 +41,8 @@ const StyleWrapper = styled.div`
   @media screen and (max-width: ${BreakPoints.MD}) {
     background: #f7f7f7;
     padding: 1rem;
+    top: unset;
+    bottom: 0;
 
     .nav-area-link {
       flex: 1;
@@ -79,7 +85,7 @@ export const NavArea = () => {
           to={path}
           key={i}
         >
-          <motion.section
+          <motion.div
             {...{
               initial: { y: '-100%' },
               animate: { y: 0 },
@@ -87,7 +93,7 @@ export const NavArea = () => {
             }}
           >
             <span>{name}</span>
-          </motion.section>
+          </motion.div>
         </NavLink>
       ))}
       <DarkButton className="nav-item" onClick={logOut}>

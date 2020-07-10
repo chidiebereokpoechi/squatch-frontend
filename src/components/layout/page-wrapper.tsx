@@ -4,9 +4,9 @@ import { BreakPoints } from '../misc'
 
 export const PageWrapper = styled(motion.div).attrs(() => {
   return {
-    initial: { x: '-100%' },
-    animate: { x: 0 },
-    exit: { x: '100%' },
+    initial: { opacity: 0 },
+    animate: { opacity: 1 },
+    exit: { opacity: 0 },
   } as MotionProps
 })`
   padding: 1.5rem;

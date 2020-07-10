@@ -1,0 +1,2 @@
+export const PRINT_CONTENT_MIN_LENGTH = 1
+export const PRINT_CONTENT_MAX_LENGTH = 140
