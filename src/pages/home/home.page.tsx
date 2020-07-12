@@ -2,30 +2,38 @@ import { useViewportScroll } from 'framer-motion'
 import { observer } from 'mobx-react'
 import React from 'react'
 import { PageWrapper, PrintsList } from '../../components'
+import { PrintsSocketService } from '../../services'
 import { printsStore } from '../../stores/prints.store'
 import { CreatePrintBox } from './components'
 
 export const HomePage: React.FC = observer(() => {
   const { scrollYProgress } = useViewportScroll()
   const { feed } = printsStore
+  const [
+    printsSService,
+    setPrintsSService,
+  ] = React.useState<PrintsSocketService | null>(null)
 
   React.useEffect(() => {
     if (!printsStore.feed.length) {
-      printsStore.listPrints()
+      printsStore.getFeed()
     }
 
     return scrollYProgress.onChange((yProgress) => {
       if (yProgress === 0) {
-        printsStore.listPrints()
+        printsStore.getFeed()
       }
     })
   }, [scrollYProgress])
 
-  // React.useEffect(() => {
-  //   if (scrollYProgress.) {
-  //     printsStore.listPrints()
-  //   }
-  // }, [scrollYProgress])
+  React.useEffect(() => {
+    setPrintsSService(new PrintsSocketService())
+
+    return () => {
+      printsSService?.destruct()
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
   return (
     <PageWrapper>

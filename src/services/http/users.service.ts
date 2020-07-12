@@ -1,6 +1,6 @@
-import { UserSignupModel } from '../models'
-import { User } from '../types'
-import { ApiClient } from '../util'
+import { UserSignupModel } from '../../models'
+import { User } from '../../types'
+import { ApiClient } from '../../util'
 
 export class UsersService {
   public static async checkIfEmailTaken(email: string) {

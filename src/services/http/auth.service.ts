@@ -1,6 +1,6 @@
-import { UserLoginModel } from '../models'
-import { User } from '../types'
-import { ApiClient } from '../util'
+import { UserLoginModel } from '../../models'
+import { User } from '../../types'
+import { ApiClient } from '../../util'
 
 export class AuthService {
   public static async getAuthedUser() {

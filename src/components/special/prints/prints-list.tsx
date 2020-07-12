@@ -1,7 +1,17 @@
 import { AnimatePresence, motion } from 'framer-motion'
 import React from 'react'
+import styled from 'styled-components'
 import { Print } from '../../../types'
+import { BreakPoints } from '../../misc'
 import { PrintBox } from './print-box'
+
+const StyledDiv = styled(motion.div)`
+  width: 35rem;
+
+  @media screen and (max-width: ${BreakPoints.SM}) {
+    width: 100%;
+  }
+`
 
 interface PrintsListProps {
   prints: Print[]
@@ -9,7 +19,7 @@ interface PrintsListProps {
 
 export const PrintsList: React.FC<PrintsListProps> = ({ prints }) => {
   return (
-    <motion.div
+    <StyledDiv
       initial={{
         display: 'grid',
         gridTemplateColumns: '1fr',
@@ -22,6 +32,6 @@ export const PrintsList: React.FC<PrintsListProps> = ({ prints }) => {
           <PrintBox print={print} key={print.id} />
         ))}
       </AnimatePresence>
-    </motion.div>
+    </StyledDiv>
   )
 }

@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import { BreakPoints } from '../../../components'
 
 export const CreatePrintContainer = styled.form`
   background: #fffffff0;
@@ -7,7 +8,7 @@ export const CreatePrintContainer = styled.form`
   border: 1px solid #2a2a2a;
   border-bottom-width: 2px;
   border-radius: 0.5rem;
-  width: 40rem;
+  width: 35rem;
 
   textarea {
     border: none;
@@ -21,5 +22,9 @@ export const CreatePrintContainer = styled.form`
     padding: 1.5rem;
     display: flex;
     justify-content: flex-end;
+  }
+
+  @media screen and (max-width: ${BreakPoints.SM}) {
+    width: 100%;
   }
 `

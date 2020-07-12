@@ -8,7 +8,26 @@ class PrintsStore implements PrintsState {
   @observable private _feed: Record<number, Print> = {}
   @observable private _openPrint?: Print
 
-  @action public listPrints = async () => {
+  @action public getFeed = async () => {
+    try {
+      const response = await PrintsService.list()
+      if (response.data) {
+        runInAction(() => {
+          ;(response.data as Print[]).forEach((print) => {
+            if (this._feed[print.id]?.actedOn) {
+              return
+            }
+
+            this._feed[print.id] = print
+          })
+        })
+      }
+    } catch (e) {
+      //
+    }
+  }
+
+  @action public refreshFeed = async () => {
     try {
       const response = await PrintsService.list()
       if (response.data) {
@@ -56,7 +75,11 @@ class PrintsStore implements PrintsState {
       const response = await PrintsService.like(id)
 
       if (response.data) {
-        return response.data
+        runInAction(() => {
+          this._feed[id].userHasLiked = true
+          this._feed[id].likeCount = this._feed[id].likeCount + 1
+          this._feed[id].actedOn = true
+        })
       }
     } catch (e) {
       //
@@ -67,7 +90,11 @@ class PrintsStore implements PrintsState {
     try {
       const response = await PrintsService.unlike(id)
       if (response.data) {
-        return response.data
+        runInAction(() => {
+          this._feed[id].userHasLiked = false
+          this._feed[id].likeCount = this._feed[id].likeCount - 1
+          this._feed[id].actedOn = true
+        })
       }
     } catch (e) {
       //

@@ -1,6 +1,6 @@
-import { CreatePrintModel } from '../models'
-import { Print } from '../types'
-import { ApiClient } from '../util'
+import { CreatePrintModel } from '../../models'
+import { Print } from '../../types'
+import { ApiClient } from '../../util'
 
 export class PrintsService {
   public static async create(body: CreatePrintModel) {

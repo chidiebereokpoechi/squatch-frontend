@@ -4,17 +4,17 @@ import {
   motion,
   MotionProps,
 } from 'framer-motion'
-import { matches, some } from 'lodash'
 import { observer } from 'mobx-react'
+import moment from 'moment'
 import React from 'react'
 import { Heart } from 'react-feather'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
-import { authStore } from '../../../stores/auth.store'
 import { printsStore } from '../../../stores/prints.store'
 import { Print } from '../../../types'
 import { history } from '../../../util'
 import { generateMotionButtonAttributes } from '../../buttons/common'
+import { FormattedText } from '../../misc'
 
 export const StyledDiv = styled(motion.div).attrs(
   () =>
@@ -29,13 +29,13 @@ export const StyledDiv = styled(motion.div).attrs(
   border: 1px solid #2a2a2a;
   border-bottom-width: 2px;
   border-radius: 0.5rem;
-  width: 40rem;
   display: grid;
   grid-template-columns: 5rem 1fr;
   cursor: pointer;
+  width: 100%;
 
   aside {
-    background: #fffffff0;
+    background-color: #fffffff0;
     backdrop-filter: blur(1rem);
     padding: 1.5rem;
     border-top-left-radius: 0.5rem;
@@ -49,10 +49,12 @@ export const StyledDiv = styled(motion.div).attrs(
     padding: 1.5rem;
     border-top-right-radius: 0.5rem;
     border-bottom-right-radius: 0.5rem;
+    cursor: initial;
   }
 
   header {
     display: flex;
+    justify-content: space-between;
     align-items: center;
     font-size: 0.85rem;
   }
@@ -68,14 +70,19 @@ export const StyledDiv = styled(motion.div).attrs(
   }
 
   .username {
-    color: #8b8f98;
+    color: #e91e63;
+  }
+
+  .time-ago {
+    font-size: 80%;
+    color: #737373;
   }
 
   .content {
     width: 100%;
     font-size: 0.95rem;
     white-space: pre-wrap;
-    word-break: break-all;
+    word-break: break-word;
     overflow: hidden;
   }
 `
@@ -95,16 +102,9 @@ type LikeButtonType = ForwardRefComponent<
 const LikeButton = styled<LikeButtonType>(motion.button).attrs(
   ({ children, liked }) => {
     return {
-      ...generateMotionButtonAttributes(
-        children,
-        false,
-        {
-          color: liked ? '#000000' : '#ff0a0a',
-          backgroundColor: liked ? '#ececec' : '#ffdbdb',
-        },
-        {}
-      ),
-      initial: { color: liked ? '#ff0a0a' : '#aaaaaa' },
+      ...generateMotionButtonAttributes(children, false, {
+        backgroundColor: liked ? '#ececec' : '#ffdbdb',
+      }),
     }
   }
 )`
@@ -112,6 +112,7 @@ const LikeButton = styled<LikeButtonType>(motion.button).attrs(
   height: 2rem;
   width: 2rem;
   display: flex;
+  color: ${(props) => (props.liked ? '#ff0a0a' : '#000000')};
   align-items: center;
   justify-content: center;
   border: none;
@@ -129,8 +130,20 @@ interface Props {
 }
 
 export const PrintBox: React.FC<Props> = observer(
-  ({ print: { id, content, creator, likers } }) => {
-    const liked = some(likers, matches({ id: authStore.user?.id as number }))
+  ({ print: { id, content, createdAt, creator, likeCount, userHasLiked } }) => {
+    const [timeAgo, setTimeAgo] = React.useState(moment(createdAt).fromNow())
+
+    React.useEffect(() => {
+      const REFRESH_INTERVAL = 2 * 60 * 100 // 2 minutes
+
+      const interval = setInterval(() => {
+        setTimeAgo(moment(createdAt).fromNow())
+      }, REFRESH_INTERVAL)
+
+      return () => {
+        clearInterval(interval)
+      }
+    }, [setTimeAgo, createdAt])
 
     return (
       <StyledDiv
@@ -138,7 +151,15 @@ export const PrintBox: React.FC<Props> = observer(
           history.push(`/prints/${id}`)
         }}
       >
-        <aside>
+        <motion.aside
+          initial={{
+            backgroundColor: 'rgba(255, 255, 255, 0.9)',
+          }}
+          whileHover={{
+            backgroundColor: 'rgba(115, 60, 255, 0.9)',
+            borderRightColor: '#2a2a2a',
+          }}
+        >
           <UserImage
             whileHover={{ scale: 1.25 }}
             onClick={(e) => {
@@ -146,7 +167,7 @@ export const PrintBox: React.FC<Props> = observer(
               history.push(`/users/${creator.username}`)
             }}
           />
-        </aside>
+        </motion.aside>
         <section
           className="body"
           onClick={(e) => {
@@ -161,19 +182,23 @@ export const PrintBox: React.FC<Props> = observer(
                 @{creator.username}
               </Link>
             </span>
+            <span className="time-ago">{timeAgo}</span>
           </header>
           <main>
-            <span className="content">{content}</span>
+            <span className="content">
+              <FormattedText text={content} />
+            </span>
           </main>
           <footer>
             <LikeButton
-              liked={liked}
+              liked={!!userHasLiked}
               onClick={() => {
-                printsStore.likePrint(id)
+                printsStore[userHasLiked ? 'unlikePrint' : 'likePrint'](id)
               }}
             >
               <Heart className="icon" />
             </LikeButton>
+            <span className="ml-3">{likeCount}</span>
           </footer>
         </section>
       </StyledDiv>
