@@ -8,26 +8,26 @@ import {
 import { UsersService } from '../../../../services'
 
 @ValidatorConstraint({ async: true })
-export class UsernameNotInUseConstraint
+export class UsernameNotTakenConstraint
   implements ValidatorConstraintInterface {
   public async validate(username: string, args: ValidationArguments) {
     try {
       const response = await UsersService.checkIfUsernameTaken(username)
-      return response.data as boolean
+      return !response.data as boolean
     } catch (e) {
       return false
     }
   }
 }
 
-export function UsernameNotInUse(validationOptions?: ValidationOptions) {
+export function UsernameNotTaken(validationOptions?: ValidationOptions) {
   return function (object: Object, propertyName: string) {
     registerDecorator({
       target: object.constructor,
       propertyName,
       options: validationOptions,
       constraints: [],
-      validator: UsernameNotInUseConstraint,
+      validator: UsernameNotTakenConstraint,
     })
   }
 }

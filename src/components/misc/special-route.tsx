@@ -20,7 +20,7 @@ export const SpecialRoute: React.FC<Props> = observer(({ auth, ...props }) => {
     return (
       <Redirect
         to={{
-          pathname: '/login',
+          pathname: '/log-in',
           state: { referrer: props.location?.pathname },
         }}
       />

@@ -9,7 +9,7 @@ import {
   SpecialRoute,
   TopBar,
 } from './components'
-import { HomePage, LoginPage } from './pages'
+import { HomePage, LogInPage, SignUpPage } from './pages'
 import { history } from './util'
 
 export const App: React.FC = () => {
@@ -21,9 +21,15 @@ export const App: React.FC = () => {
         <Switch>
           <SpecialRoute
             exact
-            path="/login"
+            path="/log-in"
             auth="no-auth"
-            component={LoginPage}
+            component={LogInPage}
+          />
+          <SpecialRoute
+            exact
+            path="/sign-up"
+            auth="no-auth"
+            component={SignUpPage}
           />
           <SpecialRoute path="/" auth="auth">
             <AppWrapper>

@@ -1,13 +1,24 @@
-import { motion } from 'framer-motion'
+import { ForwardRefComponent, HTMLMotionProps, motion } from 'framer-motion'
 import styled from 'styled-components'
 import { generateMotionButtonAttributes } from './common'
 
-export const DarkButton = styled(motion.button).attrs(
-  ({ children, disabled }) =>
-    generateMotionButtonAttributes(children, disabled, {
-      color: '#000000',
-      backgroundColor: '#fde500',
-    })
+type Button = ForwardRefComponent<
+  HTMLButtonElement,
+  HTMLMotionProps<'button'> & { isLoading?: boolean }
+>
+
+export const DarkButton = styled<Button>(motion.button).attrs(
+  ({ children, disabled, isLoading, ...props }) =>
+    generateMotionButtonAttributes({
+      children,
+      disabled,
+      isLoading,
+      whileHover: {
+        color: '#000000',
+        backgroundColor: '#fde500',
+      },
+      props,
+    }),
 )`
   background: #000000;
   height: 2rem;
@@ -20,9 +31,9 @@ export const DarkButton = styled(motion.button).attrs(
   align-items: center;
 
   :disabled {
-    background: #e2e2e2dd;
+    background: #f5f5f5 !important;
     backdrop-filter: blur(0.25rem);
-    color: #616161;
+    color: #616161 !important;
   }
 
   .icon {
@@ -33,6 +44,6 @@ export const DarkButton = styled(motion.button).attrs(
   }
 
   .icon + * {
-    margin-left: 0.25rem;
+    margin-left: 0.5rem;
   }
 `

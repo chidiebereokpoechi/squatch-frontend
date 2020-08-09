@@ -6,7 +6,7 @@ import {
   Validate,
 } from 'class-validator'
 import { BaseModel } from '../../types'
-import { EmailNotInUseConstraint, UsernameNotInUseConstraint } from '../../util'
+import { EmailNotTakenConstraint, UsernameNotTakenConstraint } from '../../util'
 import {
   NAME_MAX_LENGTH,
   NAME_MIN_LENGTH,
@@ -19,12 +19,12 @@ import {
 import { ValidationMessages } from '../../util/validation/messages'
 
 export class UserSignupModel implements BaseModel {
-  @Validate(EmailNotInUseConstraint, { message: ValidationMessages.EmailInUse })
+  @Validate(EmailNotTakenConstraint, { message: ValidationMessages.EmailTaken })
   @IsEmail({}, { message: ValidationMessages.EmailInvalid })
   public email: string = ''
 
-  @Validate(UsernameNotInUseConstraint, {
-    message: ValidationMessages.EmailInUse,
+  @Validate(UsernameNotTakenConstraint, {
+    message: ValidationMessages.UsernameTaken,
   })
   @Matches(USERNAME_PATTERN, {
     message: ValidationMessages.UsernameInvalidCharacter,

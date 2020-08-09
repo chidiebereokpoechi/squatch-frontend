@@ -1,5 +1,5 @@
 import { action, computed, observable, runInAction } from 'mobx'
-import { UserLoginModel, UserSignupModel } from '../models'
+import { LogInModel, UserSignupModel } from '../models'
 import { UsersService } from '../services'
 import { User, UsersState } from '../types'
 import { authStore } from './auth.store'
@@ -38,7 +38,7 @@ class UsersStore implements UsersState {
     try {
       const response = await UsersService.signUp(model)
       if (response.data) {
-        const login = new UserLoginModel()
+        const login = new LogInModel()
         login.usernameOrEmail = model.username
         login.password = model.password
 

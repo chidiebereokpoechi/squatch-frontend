@@ -1,25 +1,40 @@
-import { MotionProps, TargetAndTransition } from 'framer-motion'
+import {
+  HTMLMotionProps,
+  MotionProps,
+  TargetAndTransition,
+} from 'framer-motion'
 import React from 'react'
 
-export const generateMotionButtonAttributes = (
-  _children: React.ReactNode,
-  disabled: boolean | undefined,
-  whileHover: TargetAndTransition = {},
-  whileTap: TargetAndTransition = {}
-): MotionProps => {
-  const children = (
+interface Args {
+  children: React.ReactNode
+  disabled?: boolean | undefined
+  isLoading?: boolean
+  whileHover?: TargetAndTransition
+  whileTap?: TargetAndTransition
+  props: HTMLMotionProps<'button'>
+}
+
+export const generateMotionButtonAttributes = ({
+  children,
+  disabled,
+  isLoading,
+  whileHover = {},
+  whileTap = {},
+  props,
+}: Args): MotionProps => {
+  const _children = (
     <React.Fragment>
-      {disabled ? (
+      {isLoading ? (
         <div className="spinner-border spinner-border-sm" role="status">
           <span className="sr-only">Loading...</span>
         </div>
       ) : (
-        _children
+        children
       )}
     </React.Fragment>
   )
 
-  return {
+  const motionAttributes: MotionProps = {
     whileHover: {
       scale: 1.125,
       ...whileHover,
@@ -28,6 +43,12 @@ export const generateMotionButtonAttributes = (
       scale: 0.9,
       ...whileTap,
     },
-    children,
-  } as MotionProps
+  }
+
+  return {
+    ...props,
+    ...(disabled ? {} : motionAttributes),
+    children: _children,
+    disabled,
+  } as HTMLMotionProps<'button'>
 }

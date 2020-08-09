@@ -1,5 +1,5 @@
 import { action, computed, observable, runInAction } from 'mobx'
-import { UserLoginModel } from '../models'
+import { LogInModel } from '../models'
 import { AuthService } from '../services'
 import { AuthState, User } from '../types'
 
@@ -24,7 +24,7 @@ class AuthStore implements AuthState {
     }
   }
 
-  @action public logIn = async (login: UserLoginModel) => {
+  @action public logIn = async (login: LogInModel) => {
     try {
       const response = await AuthService.logIn(login)
       if (response.data) {

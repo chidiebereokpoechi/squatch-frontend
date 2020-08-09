@@ -1,1 +1,1 @@
-export * from './user-login.model'
+export * from './log-in.model'

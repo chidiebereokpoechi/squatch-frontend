@@ -1,12 +1,12 @@
 import React from 'react'
 import { EntryPageWrapper, PageWrapper } from '../../components'
-import { LoginForm } from './forms'
+import { LogInForm } from './forms'
 
-export const LoginPage = () => {
+export const LogInPage: React.FC = () => {
   return (
     <PageWrapper>
       <EntryPageWrapper>
-        <LoginForm />
+        <LogInForm />
       </EntryPageWrapper>
     </PageWrapper>
   )

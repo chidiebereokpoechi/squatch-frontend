@@ -1,8 +1,9 @@
 export enum ValidationMessages {
   // Email validation
-  EmailInUse = 'The email [$value] is already in use',
+  EmailTaken = 'The email [$value] is already taken',
   EmailInvalid = 'Invalid email',
 
+  UsernameTaken = 'The username [$value] is already taken',
   UsernameInvalidCharacter = 'Only letters, underscores and numbers are allowed',
 
   // Generic

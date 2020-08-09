@@ -23,7 +23,7 @@ export const StyledDiv = styled(motion.div).attrs(
       initial: { opacity: 0, y: 50, scale: 0.3 },
       animate: { opacity: 1, y: 0, scale: 1 },
       exit: { opacity: 0, scale: 0.5, transition: { duration: 0.2 } },
-    } as MotionProps)
+    } as MotionProps),
 )`
   border: 1px solid #e2e2e2;
   border: 1px solid #2a2a2a;
@@ -100,13 +100,17 @@ type LikeButtonType = ForwardRefComponent<
 >
 
 const LikeButton = styled<LikeButtonType>(motion.button).attrs(
-  ({ children, liked }) => {
+  ({ children, liked, ...props }) => {
     return {
-      ...generateMotionButtonAttributes(children, false, {
-        backgroundColor: liked ? '#ececec' : '#ffdbdb',
+      ...generateMotionButtonAttributes({
+        children,
+        whileHover: {
+          backgroundColor: liked ? '#ececec' : '#ffdbdb',
+        },
+        props,
       }),
     }
-  }
+  },
 )`
   background: transparent;
   height: 2rem;
@@ -203,5 +207,5 @@ export const PrintBox: React.FC<Props> = observer(
         </section>
       </StyledDiv>
     )
-  }
+  },
 )
