@@ -24,30 +24,14 @@ const Form: React.FC<FormikProps<UserSignupModel>> = ({
         </h3>
         <h5>Create an account to start printing!</h5>
       </header>
-      <main
-        className="mb-5"
-        style={{ display: 'grid', gridTemplateColumns: '1fr', gap: '2rem' }}
-      >
+      <main className="mb-5" style={{ display: 'grid', gridTemplateColumns: '1fr', gap: '2rem' }}>
         <TextBox placeholder="Email" name="email" disabled={shouldDisable} />
-        <TextBox
-          placeholder="Username"
-          name="username"
-          disabled={shouldDisable}
-        />
+        <TextBox placeholder="Username" name="username" disabled={shouldDisable} />
         <TextBox placeholder="Name" name="name" disabled={shouldDisable} />
-        <TextBox
-          placeholder="Password"
-          name="password"
-          type="password"
-          disabled={shouldDisable}
-        />
+        <TextBox placeholder="Password" name="password" type="password" disabled={shouldDisable} />
       </main>
       <footer>
-        <PrimaryButton
-          type="submit"
-          disabled={!isValid || shouldDisable}
-          isLoading={shouldDisable}
-        >
+        <PrimaryButton type="submit" disabled={!isValid || shouldDisable} isLoading={shouldDisable}>
           <UserPlus className="icon" />
           <span>Sign up</span>
         </PrimaryButton>

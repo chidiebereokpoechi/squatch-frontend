@@ -51,11 +51,7 @@ export const TopBar: React.FC = observer(() => {
         />
         <span>
           Hey{' '}
-          <motion.span
-            className="name"
-            whileHover={{ scale: 1.1, x: 5 }}
-            whileTap={{ scale: 0.9 }}
-          >
+          <motion.span className="name" whileHover={{ scale: 1.1, x: 5 }} whileTap={{ scale: 0.9 }}>
             <AnimatedLink to="/profile">{user?.username}</AnimatedLink>
           </motion.span>
         </span>

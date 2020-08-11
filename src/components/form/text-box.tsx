@@ -62,13 +62,7 @@ export const TextBox: React.FC<Props> = ({ name, className, ...props }) => {
   const valid = React.useMemo(() => !meta.error && meta.touched, [meta])
 
   return (
-    <Wrapper
-      className={getClassNames(
-        className,
-        invalid && 'invalid',
-        valid && 'valid',
-      )}
-    >
+    <Wrapper className={getClassNames(className, invalid && 'invalid', valid && 'valid')}>
       <input {...field} {...props} />
       {invalid && <span className="error-message">{meta.error}</span>}
     </Wrapper>

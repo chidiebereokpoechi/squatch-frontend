@@ -79,12 +79,7 @@ export const NavArea = () => {
   return (
     <StyleWrapper>
       {links.map(({ name, path, exact }, i) => (
-        <NavLink
-          className="nav-area-link nav-item"
-          exact={exact}
-          to={path}
-          key={i}
-        >
+        <NavLink className="nav-area-link nav-item" exact={exact} to={path} key={i}>
           <motion.div
             {...{
               initial: { y: '-100%' },

@@ -19,30 +19,15 @@ export const App: React.FC = () => {
       <AppBackground />
       <AnimatePresence>
         <Switch>
-          <SpecialRoute
-            exact
-            path="/log-in"
-            auth="no-auth"
-            component={LogInPage}
-          />
-          <SpecialRoute
-            exact
-            path="/sign-up"
-            auth="no-auth"
-            component={SignUpPage}
-          />
+          <SpecialRoute exact path="/log-in" auth="no-auth" component={LogInPage} />
+          <SpecialRoute exact path="/sign-up" auth="no-auth" component={SignUpPage} />
           <SpecialRoute path="/" auth="auth">
             <AppWrapper>
               <TopBar />
               <main>
                 <NavArea />
                 <Switch>
-                  <SpecialRoute
-                    exact
-                    path="/"
-                    auth="auth"
-                    component={HomePage}
-                  />
+                  <SpecialRoute exact path="/" auth="auth" component={HomePage} />
                 </Switch>
               </main>
             </AppWrapper>

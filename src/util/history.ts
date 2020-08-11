@@ -1,10 +1,4 @@
-import {
-  Action,
-  createBrowserHistory,
-  Location,
-  LocationState,
-  Path,
-} from 'history'
+import { Action, createBrowserHistory, Location, LocationState, Path } from 'history'
 
 export const history = createBrowserHistory()
 
@@ -89,7 +83,7 @@ export function goBackOrPush(location: Path, state?: LocationState): void {
 
 export function blockNavigation() {
   const unBlock = history.block(
-    'Are you sure you want to leave this page? You have unsaved changes'
+    'Are you sure you want to leave this page? You have unsaved changes',
   )
   return { unBlock }
 }

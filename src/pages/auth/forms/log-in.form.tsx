@@ -24,28 +24,12 @@ const Form: React.FC<FormikProps<LogInModel>> = ({
         </h3>
         <h5>Welcome back</h5>
       </header>
-      <main
-        className="mb-5"
-        style={{ display: 'grid', gridTemplateColumns: '1fr', gap: '2rem' }}
-      >
-        <TextBox
-          placeholder="Username or email"
-          name="usernameOrEmail"
-          disabled={shouldDisable}
-        />
-        <TextBox
-          placeholder="Password"
-          name="password"
-          type="password"
-          disabled={shouldDisable}
-        />
+      <main className="mb-5" style={{ display: 'grid', gridTemplateColumns: '1fr', gap: '2rem' }}>
+        <TextBox placeholder="Username or email" name="usernameOrEmail" disabled={shouldDisable} />
+        <TextBox placeholder="Password" name="password" type="password" disabled={shouldDisable} />
       </main>
       <footer>
-        <PrimaryButton
-          type="submit"
-          disabled={!isValid || shouldDisable}
-          isLoading={shouldDisable}
-        >
+        <PrimaryButton type="submit" disabled={!isValid || shouldDisable} isLoading={shouldDisable}>
           <ChevronsRight className="icon" />
           <span>Log in</span>
         </PrimaryButton>

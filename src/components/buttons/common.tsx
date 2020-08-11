@@ -1,8 +1,4 @@
-import {
-  HTMLMotionProps,
-  MotionProps,
-  TargetAndTransition,
-} from 'framer-motion'
+import { HTMLMotionProps, MotionProps, TargetAndTransition } from 'framer-motion'
 import React from 'react'
 
 interface Args {

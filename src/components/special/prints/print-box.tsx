@@ -1,9 +1,4 @@
-import {
-  ForwardRefComponent,
-  HTMLMotionProps,
-  motion,
-  MotionProps,
-} from 'framer-motion'
+import { ForwardRefComponent, HTMLMotionProps, motion, MotionProps } from 'framer-motion'
 import { observer } from 'mobx-react'
 import moment from 'moment'
 import React from 'react'
@@ -99,19 +94,17 @@ type LikeButtonType = ForwardRefComponent<
   { liked: boolean } & HTMLMotionProps<'button'>
 >
 
-const LikeButton = styled<LikeButtonType>(motion.button).attrs(
-  ({ children, liked, ...props }) => {
-    return {
-      ...generateMotionButtonAttributes({
-        children,
-        whileHover: {
-          backgroundColor: liked ? '#ececec' : '#ffdbdb',
-        },
-        props,
-      }),
-    }
-  },
-)`
+const LikeButton = styled<LikeButtonType>(motion.button).attrs(({ children, liked, ...props }) => {
+  return {
+    ...generateMotionButtonAttributes({
+      children,
+      whileHover: {
+        backgroundColor: liked ? '#ececec' : '#ffdbdb',
+      },
+      props,
+    }),
+  }
+})`
   background: transparent;
   height: 2rem;
   width: 2rem;

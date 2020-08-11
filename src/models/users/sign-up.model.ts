@@ -1,10 +1,4 @@
-import {
-  IsEmail,
-  Matches,
-  MaxLength,
-  MinLength,
-  Validate,
-} from 'class-validator'
+import { IsEmail, Matches, MaxLength, MinLength, Validate } from 'class-validator'
 import { BaseModel } from '../../types'
 import { EmailNotTakenConstraint, UsernameNotTakenConstraint } from '../../util'
 import {

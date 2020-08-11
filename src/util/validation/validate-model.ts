@@ -2,10 +2,7 @@ import { validate } from 'class-validator'
 import { BaseModel } from '../../types'
 import { mapErrorsToRecord } from './map-errors-to-record'
 
-export async function validateModel<T extends BaseModel = any>(
-  values: T,
-  model?: new () => T
-) {
+export async function validateModel<T extends BaseModel = any>(values: T, model?: new () => T) {
   if (model) {
     values = { ...new model(), ...values }
   }

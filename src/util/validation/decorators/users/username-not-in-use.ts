@@ -8,8 +8,7 @@ import {
 import { UsersService } from '../../../../services'
 
 @ValidatorConstraint({ async: true })
-export class UsernameNotTakenConstraint
-  implements ValidatorConstraintInterface {
+export class UsernameNotTakenConstraint implements ValidatorConstraintInterface {
   public async validate(username: string, args: ValidationArguments) {
     try {
       const response = await UsersService.checkIfUsernameTaken(username)

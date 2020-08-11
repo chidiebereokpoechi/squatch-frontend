@@ -9,10 +9,7 @@ import { CreatePrintBox } from './components'
 export const HomePage: React.FC = observer(() => {
   const { scrollYProgress } = useViewportScroll()
   const { feed } = printsStore
-  const [
-    printsSService,
-    setPrintsSService,
-  ] = React.useState<PrintsSocketService | null>(null)
+  const [printsSService, setPrintsSService] = React.useState<PrintsSocketService | null>(null)
 
   React.useEffect(() => {
     if (!printsStore.feed.length) {

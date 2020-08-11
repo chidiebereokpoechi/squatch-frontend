@@ -25,11 +25,7 @@ export enum HttpMethods {
 }
 
 function LogRequests() {
-  return function (
-    target: Function,
-    _: string,
-    descriptor: PropertyDescriptor
-  ) {
+  return function (target: Function, _: string, descriptor: PropertyDescriptor) {
     const originalFunction: Function = descriptor.value
     descriptor.value = async function (...args: any[]) {
       try {
@@ -57,7 +53,7 @@ export class ApiClient {
   private static async request<ResponseType = any, RequestType = any>(
     method: HttpMethods,
     endpoint: string,
-    request?: ApiRequest<RequestType>
+    request?: ApiRequest<RequestType>,
   ): Promise<ApiResponse<ResponseType>> {
     this.abortController = new AbortController()
     const base = process.env.REACT_APP_BASE_URL
@@ -101,16 +97,13 @@ export class ApiClient {
       }
 
       const response = await fetch(base + '/' + endpoint, options)
-      const responseContent = (await response.json()) as ApiResponse<
-        ResponseType
-      >
+      const responseContent = (await response.json()) as ApiResponse<ResponseType>
       return responseContent
     } catch (error) {
       const { response } = error
 
       if (!response || response.status === 500) {
-        const message =
-          response.message ?? 'Error connecting to server. Try again'
+        const message = response.message ?? 'Error connecting to server. Try again'
         return { message, ok: false, status: 500 }
       }
 
@@ -135,7 +128,7 @@ export class ApiClient {
   public static post<ResponseType = any, RequestType = any>(
     endpoint: string,
     body?: RequestType,
-    model?: any
+    model?: any,
   ) {
     return this.request<ResponseType>(HttpMethods.Post, endpoint, {
       body,
@@ -147,26 +140,21 @@ export class ApiClient {
     endpoint: string,
     id: number | string,
     body?: RequestType,
-    model?: any
+    model?: any,
   ) {
-    return this.post<ResponseType, RequestType>(
-      `${endpoint}/${id}`,
-      body,
-      model
-    )
+    return this.post<ResponseType, RequestType>(`${endpoint}/${id}`, body, model)
   }
 
   public static patch<ResponseType = any, RequestType = any>(
     endpoint: string,
     id?: number | string,
     body?: RequestType,
-    model?: any
+    model?: any,
   ) {
-    return this.request<ResponseType, RequestType>(
-      HttpMethods.Patch,
-      `${endpoint}/${id || ''}`,
-      { body, model }
-    )
+    return this.request<ResponseType, RequestType>(HttpMethods.Patch, `${endpoint}/${id || ''}`, {
+      body,
+      model,
+    })
   }
 
   public static delete<T = any>(endpoint: string) {
@@ -177,12 +165,11 @@ export class ApiClient {
     endpoint: string,
     id?: number | string,
     body?: RequestType,
-    model?: any
+    model?: any,
   ) {
-    return this.request<ResponseType, RequestType>(
-      HttpMethods.Delete,
-      `${endpoint}/${id || ''}`,
-      { body, model }
-    )
+    return this.request<ResponseType, RequestType>(HttpMethods.Delete, `${endpoint}/${id || ''}`, {
+      body,
+      model,
+    })
   }
 }

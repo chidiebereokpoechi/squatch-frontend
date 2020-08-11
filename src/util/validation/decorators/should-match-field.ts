@@ -1,13 +1,6 @@
-import {
-  registerDecorator,
-  ValidationArguments,
-  ValidationOptions,
-} from 'class-validator'
+import { registerDecorator, ValidationArguments, ValidationOptions } from 'class-validator'
 
-export function ShouldMatchField(
-  field: string,
-  validationOptions?: ValidationOptions
-) {
+export function ShouldMatchField(field: string, validationOptions?: ValidationOptions) {
   return function (object: Object, propertyName: string) {
     registerDecorator({
       name: 'shouldMatchField',
